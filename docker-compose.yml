@@ -1,12 +1,12 @@
 services:
   postgres:
-    container_name: postgres-sql-bsn
+    container_name: postgres-sql-pbsn
     image: postgres
     environment:
       POSTGRES_USER: username
       POSTGRES_PASSWORD: password
       PGDATA: /var/lib/postgresql/data
-      POSTGRES_DB: book_social_network
+      POSTGRES_DB: practice_book_social
     volumes:
       - postgres:/data/postgres
     ports:
@@ -15,7 +15,7 @@ services:
       - spring-demo
     restart: unless-stopped
   mail-dev:
-    container_name: mail-dev-bsn
+    container_name: mail-dev-pbsn
     image: maildev/maildev
     ports:
       - 1080:1080

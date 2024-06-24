@@ -3,14 +3,13 @@ package com.datien.booksocialnetwork.auth;
 import com.datien.booksocialnetwork.email.EmailService;
 import com.datien.booksocialnetwork.email.EmailTemplateName;
 import com.datien.booksocialnetwork.role.RoleRepository;
-import com.datien.booksocialnetwork.security.JwtFilter;
 import com.datien.booksocialnetwork.security.JwtService;
 import com.datien.booksocialnetwork.user.Token;
 import com.datien.booksocialnetwork.user.TokenRepository;
 import com.datien.booksocialnetwork.user.User;
 import com.datien.booksocialnetwork.user.UserRepository;
 import jakarta.mail.MessagingException;
-import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,7 +35,7 @@ public class AuthenticationService {
     private final EmailService emailService;
 
     @Value("${application.mailing.frontend.activation-url}")
-    private String activationEmail;
+    private String activationUrl;
 
     public void register(RegistrationRequest dto) throws MessagingException {
         var userRole = roleRepository.findByName("USER")
@@ -55,42 +54,44 @@ public class AuthenticationService {
         userRepository.save(user);
         sendValidationEmail(user);
     }
-
     private void sendValidationEmail(User user) throws MessagingException {
-        var refreshToken = generateRefreshToken(user);
+        var newToken = generateAndSaveActivationToken(user);
+
         emailService.sendEmail(
                 user.getEmail(),
-                user.getUsername(),
+                user.fullName(),
                 EmailTemplateName.ACTIVATE_ACCOUNT,
-                activationEmail,
-                refreshToken,
+                activationUrl,
+                newToken,
                 "Account activation"
         );
     }
 
-    public String generateRefreshToken(User user) {
-        String activeCode = geneActiveCode(6);
-
-        var refreshToken = Token.builder()
-                .token(activeCode)
+    private String generateAndSaveActivationToken(User user) {
+        // Generate a token
+        String generatedToken = generateActivationCode(6);
+        var token = Token.builder()
+                .token(generatedToken)
                 .createdDate(LocalDateTime.now())
                 .expiredDate(LocalDateTime.now().plusMinutes(15))
                 .user(user)
                 .build();
-        tokenRepository.save(refreshToken);
-        return activeCode;
+        tokenRepository.save(token);
+
+        return generatedToken;
     }
 
-    private String geneActiveCode(int length) {
-
+    private String generateActivationCode(int length) {
         String characters = "0123456789";
         StringBuilder codeBuilder = new StringBuilder();
-        SecureRandom random = new SecureRandom();
 
-        for(int i = 0; i < length; i++) {
-            int randomIndex = random.nextInt(characters.length());
+        SecureRandom secureRandom = new SecureRandom();
+
+        for (int i = 0; i < length; i++) {
+            int randomIndex = secureRandom.nextInt(characters.length());
             codeBuilder.append(characters.charAt(randomIndex));
         }
+
         return codeBuilder.toString();
     }
 
@@ -116,21 +117,23 @@ public class AuthenticationService {
                 .build();
     }
 
-    public void login(String token) throws MessagingException {
+    public void activate(String token) throws MessagingException {
+
         Token savedToken = tokenRepository.findByToken(token)
-                .orElseThrow(() -> new EntityNotFoundException("Token not found!"));
+                .orElseThrow(() -> new RuntimeException("Token Not Found"));
 
         if(LocalDateTime.now().isAfter(savedToken.getExpiredDate())) {
             sendValidationEmail(savedToken.getUser());
-            throw new RuntimeException("The token has been expired, a nwe active code has been sent to your email. Please, check it again to get the code!");
+            throw new RuntimeException("Activated token has been expired, a new activate code ahs been sent to your email. Please, check it for your new code!");
         }
 
         var user = userRepository.findById(savedToken.getUser().getId())
-                .orElseThrow(() -> new EntityNotFoundException("User not found!"));
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
         user.setEnabled(true);
         userRepository.save(user);
         savedToken.setValidatedAt(LocalDateTime.now());
         tokenRepository.save(savedToken);
+
     }
 
 }

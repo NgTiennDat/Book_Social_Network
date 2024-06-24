@@ -56,7 +56,9 @@ public class EmailService {
         helper.setFrom("contact@datien.com");
         helper.setTo(to);
         helper.setSubject(subject);
+
         String template = templateEngine.process(templateName, context);
+
         helper.setText(template, true);
 
         mailSender.send(mimeMessage);
