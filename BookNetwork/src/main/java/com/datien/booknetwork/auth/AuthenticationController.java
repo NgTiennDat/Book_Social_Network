@@ -1,5 +1,8 @@
 package com.datien.booknetwork.auth;
 
+import com.datien.booknetwork.auth.model.AuthenticationRequest;
+import com.datien.booknetwork.auth.model.AuthenticationResponse;
+import com.datien.booknetwork.auth.model.RegistrationRequest;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;

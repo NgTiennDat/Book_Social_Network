@@ -1,9 +1,12 @@
 package com.datien.booknetwork.auth;
 
+import com.datien.booknetwork.auth.model.AuthenticationRequest;
+import com.datien.booknetwork.auth.model.AuthenticationResponse;
+import com.datien.booknetwork.auth.model.RegistrationRequest;
 import com.datien.booknetwork.email.EmailService;
 import com.datien.booknetwork.email.EmailTemplateName;
 import com.datien.booknetwork.role.RoleRepository;
-import com.datien.booknetwork.security.JwtService;
+import com.datien.booknetwork.jwtUtils.JwtService;
 import com.datien.booknetwork.user.Token;
 import com.datien.booknetwork.user.TokenRepository;
 import com.datien.booknetwork.user.User;
@@ -83,7 +86,7 @@ public class AuthenticationService {
         return generatedToken;
     }
 
-    private String generateActivationCode(int lenght) {
+    public String generateActivationCode(int lenght) {
 
         String characters = "0123456789";
         StringBuilder codeBuilder = new StringBuilder();

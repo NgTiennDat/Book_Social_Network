@@ -1,2 +1,27 @@
-package com.datien.booknetwork.file;public class FileUtils {
+package com.datien.booknetwork.file;
+
+import io.micrometer.common.util.StringUtils;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+@Slf4j
+public class FileUtils {
+
+
+    public static byte[] readFromLocation(String fileUrl) {
+        if(StringUtils.isBlank(fileUrl)) {
+            return null;
+        }
+        try {
+            Path filePath = new File(fileUrl).toPath();
+            return Files.readAllBytes(filePath);
+        } catch (IOException e) {
+            log.error("No file found in the path {}", fileUrl);
+        }
+        return null;
+    }
 }

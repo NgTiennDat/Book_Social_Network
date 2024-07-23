@@ -1,9 +1,10 @@
 package com.datien.booknetwork.user;
 
+import com.datien.booknetwork.book.model.Book;
+import com.datien.booknetwork.history.BookTransactionHistory;
 import com.datien.booknetwork.role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -42,16 +43,21 @@ public class User implements UserDetails, Principal {
     private boolean accountLocked;
     private boolean enabled;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookTransactionHistory> bookTransactionHistories;
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createDate;
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

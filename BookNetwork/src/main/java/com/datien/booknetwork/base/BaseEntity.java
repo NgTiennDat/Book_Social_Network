@@ -1,4 +1,4 @@
-package base;
+package com.datien.booknetwork.base;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,7 +33,7 @@ public class BaseEntity {
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private Integer createdBy;
-    @CreatedDate
+    @LastModifiedDate
     @Column(insertable = false)
     private Integer lastModifiedBy;
 

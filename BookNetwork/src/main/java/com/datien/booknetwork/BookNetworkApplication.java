@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-@SpringBootApplication
-@EnableJpaAuditing
+
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EnableAsync
+@SpringBootApplication
 public class BookNetworkApplication {
 
     public static void main(String[] args) {
@@ -21,12 +22,8 @@ public class BookNetworkApplication {
     @Bean
     public CommandLineRunner runner(RoleRepository roleRepository) {
         return args -> {
-            if(roleRepository.findRoleByName("USER").isEmpty()) {
-                roleRepository.save(
-                        Role.builder()
-                                .name("USER")
-                                .build()
-                );
+            if (roleRepository.findRoleByName("USER").isEmpty()) {
+                roleRepository.save(Role.builder().name("USER").build());
             }
         };
     }
