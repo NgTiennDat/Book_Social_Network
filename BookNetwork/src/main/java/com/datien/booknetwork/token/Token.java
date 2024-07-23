@@ -1,5 +1,6 @@
-package com.datien.booknetwork.user;
+package com.datien.booknetwork.token;
 
+import com.datien.booknetwork.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

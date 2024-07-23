@@ -1,4 +1,4 @@
-package com.datien.booknetwork.user;
+package com.datien.booknetwork.token;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
