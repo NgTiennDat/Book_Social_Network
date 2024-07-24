@@ -1,6 +1,11 @@
-package com.datien.booksocialnetwork.book;
+package com.datien.booksocialnetwork.book.service;
 
 import com.datien.booksocialnetwork.base.PageResponse;
+import com.datien.booksocialnetwork.book.model.Book;
+import com.datien.booksocialnetwork.book.daos.BookRepository;
+import com.datien.booksocialnetwork.book.model.BookRequest;
+import com.datien.booksocialnetwork.book.model.BookResponse;
+import com.datien.booksocialnetwork.book.model.BorrowedBookResponse;
 import com.datien.booksocialnetwork.exception.OperationNotPermittedException;
 import com.datien.booksocialnetwork.history.BookTransactionHistory;
 import com.datien.booksocialnetwork.history.BookTransactionHistoryRepository;
@@ -21,7 +26,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-import static com.datien.booksocialnetwork.book.BookSpecification.withOwnerId;
+import static com.datien.booksocialnetwork.book.model.BookSpecification.withOwnerId;
 
 
 @Service

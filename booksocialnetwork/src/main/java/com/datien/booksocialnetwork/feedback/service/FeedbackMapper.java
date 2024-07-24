@@ -1,6 +1,9 @@
-package com.datien.booksocialnetwork.feedback;
+package com.datien.booksocialnetwork.feedback.service;
 
-import com.datien.booksocialnetwork.book.Book;
+import com.datien.booksocialnetwork.book.model.Book;
+import com.datien.booksocialnetwork.feedback.model.FeedbackRequest;
+import com.datien.booksocialnetwork.feedback.model.FeedbackResponse;
+import com.datien.booksocialnetwork.feedback.model.Feedback;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;

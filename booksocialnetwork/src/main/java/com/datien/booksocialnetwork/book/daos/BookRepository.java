@@ -1,5 +1,6 @@
-package com.datien.booksocialnetwork.book;
+package com.datien.booksocialnetwork.book.daos;
 
+import com.datien.booksocialnetwork.book.model.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

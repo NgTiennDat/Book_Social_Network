@@ -1,6 +1,9 @@
-package com.datien.booksocialnetwork.feedback;
+package com.datien.booksocialnetwork.feedback.controller;
 
 import com.datien.booksocialnetwork.base.PageResponse;
+import com.datien.booksocialnetwork.feedback.model.FeedbackRequest;
+import com.datien.booksocialnetwork.feedback.model.FeedbackResponse;
+import com.datien.booksocialnetwork.feedback.service.FeedbackService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

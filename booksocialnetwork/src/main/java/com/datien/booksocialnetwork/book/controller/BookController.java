@@ -1,6 +1,10 @@
-package com.datien.booksocialnetwork.book;
+package com.datien.booksocialnetwork.book.controller;
 
 import com.datien.booksocialnetwork.base.PageResponse;
+import com.datien.booksocialnetwork.book.model.BookRequest;
+import com.datien.booksocialnetwork.book.model.BookResponse;
+import com.datien.booksocialnetwork.book.service.BookService;
+import com.datien.booksocialnetwork.book.model.BorrowedBookResponse;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

@@ -1,5 +1,6 @@
-package com.datien.booksocialnetwork.feedback;
+package com.datien.booksocialnetwork.feedback.daos;
 
+import com.datien.booksocialnetwork.feedback.model.Feedback;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

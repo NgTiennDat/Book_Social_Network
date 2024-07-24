@@ -1,5 +1,9 @@
-package com.datien.booksocialnetwork.book;
+package com.datien.booksocialnetwork.book.service;
 
+import com.datien.booksocialnetwork.book.model.Book;
+import com.datien.booksocialnetwork.book.model.BookRequest;
+import com.datien.booksocialnetwork.book.model.BookResponse;
+import com.datien.booksocialnetwork.book.model.BorrowedBookResponse;
 import com.datien.booksocialnetwork.file.FileUtils;
 import com.datien.booksocialnetwork.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;

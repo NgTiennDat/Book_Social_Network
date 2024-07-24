@@ -1,7 +1,6 @@
-package com.datien.booksocialnetwork.feedback;
+package com.datien.booksocialnetwork.feedback.model;
 
 import jakarta.validation.constraints.*;
-import lombok.Data;
 
 
 public record FeedbackRequest(

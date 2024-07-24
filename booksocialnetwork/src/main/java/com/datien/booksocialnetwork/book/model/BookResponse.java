@@ -1,4 +1,4 @@
-package com.datien.booksocialnetwork.book;
+package com.datien.booksocialnetwork.book.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

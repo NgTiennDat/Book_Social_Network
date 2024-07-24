@@ -1,4 +1,4 @@
-package com.datien.booksocialnetwork.book;
+package com.datien.booksocialnetwork.book.model;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

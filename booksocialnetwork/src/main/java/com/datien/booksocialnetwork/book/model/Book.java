@@ -1,7 +1,7 @@
-package com.datien.booksocialnetwork.book;
+package com.datien.booksocialnetwork.book.model;
 
 import com.datien.booksocialnetwork.base.BaseEntity;
-import com.datien.booksocialnetwork.feedback.Feedback;
+import com.datien.booksocialnetwork.feedback.model.Feedback;
 import com.datien.booksocialnetwork.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

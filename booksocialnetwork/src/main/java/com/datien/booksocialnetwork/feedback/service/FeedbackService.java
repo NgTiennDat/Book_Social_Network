@@ -1,9 +1,13 @@
-package com.datien.booksocialnetwork.feedback;
+package com.datien.booksocialnetwork.feedback.service;
 
 import com.datien.booksocialnetwork.base.PageResponse;
-import com.datien.booksocialnetwork.book.Book;
-import com.datien.booksocialnetwork.book.BookRepository;
+import com.datien.booksocialnetwork.book.model.Book;
+import com.datien.booksocialnetwork.book.daos.BookRepository;
 import com.datien.booksocialnetwork.exception.OperationNotPermittedException;
+import com.datien.booksocialnetwork.feedback.daos.FeedbackRepository;
+import com.datien.booksocialnetwork.feedback.model.FeedbackRequest;
+import com.datien.booksocialnetwork.feedback.model.FeedbackResponse;
+import com.datien.booksocialnetwork.feedback.model.Feedback;
 import com.datien.booksocialnetwork.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -2,7 +2,7 @@ package com.datien.booksocialnetwork.history;
 
 
 import com.datien.booksocialnetwork.base.BaseEntity;
-import com.datien.booksocialnetwork.book.Book;
+import com.datien.booksocialnetwork.book.model.Book;
 import com.datien.booksocialnetwork.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

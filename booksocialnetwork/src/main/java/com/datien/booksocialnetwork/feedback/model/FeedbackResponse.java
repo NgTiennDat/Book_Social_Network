@@ -1,4 +1,4 @@
-package com.datien.booksocialnetwork.feedback;
+package com.datien.booksocialnetwork.feedback.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

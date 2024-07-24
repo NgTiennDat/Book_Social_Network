@@ -1,4 +1,4 @@
-package com.datien.booksocialnetwork.auth;
+package com.datien.booksocialnetwork.auth.model;
 
 import lombok.Builder;
 import lombok.Data;

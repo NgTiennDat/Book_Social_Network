@@ -1,5 +1,8 @@
 package com.datien.booksocialnetwork.auth;
 
+import com.datien.booksocialnetwork.auth.model.AuthenticationRequest;
+import com.datien.booksocialnetwork.auth.model.AuthenticationResponse;
+import com.datien.booksocialnetwork.auth.model.RegistrationRequest;
 import com.datien.booksocialnetwork.email.EmailService;
 import com.datien.booksocialnetwork.email.EmailTemplateName;
 import com.datien.booksocialnetwork.role.RoleRepository;

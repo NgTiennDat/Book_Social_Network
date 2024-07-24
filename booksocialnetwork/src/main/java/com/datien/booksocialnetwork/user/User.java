@@ -1,6 +1,6 @@
 package com.datien.booksocialnetwork.user;
 
-import com.datien.booksocialnetwork.book.Book;
+import com.datien.booksocialnetwork.book.model.Book;
 import com.datien.booksocialnetwork.role.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
