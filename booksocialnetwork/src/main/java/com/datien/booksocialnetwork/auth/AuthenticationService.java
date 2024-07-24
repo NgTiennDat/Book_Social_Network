@@ -4,12 +4,11 @@ import com.datien.booksocialnetwork.email.EmailService;
 import com.datien.booksocialnetwork.email.EmailTemplateName;
 import com.datien.booksocialnetwork.role.RoleRepository;
 import com.datien.booksocialnetwork.security.JwtService;
-import com.datien.booksocialnetwork.user.Token;
-import com.datien.booksocialnetwork.user.TokenRepository;
+import com.datien.booksocialnetwork.token.Token;
+import com.datien.booksocialnetwork.token.TokenRepository;
 import com.datien.booksocialnetwork.user.User;
 import com.datien.booksocialnetwork.user.UserRepository;
 import jakarta.mail.MessagingException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -72,8 +71,8 @@ public class AuthenticationService {
         String generatedToken = generateActivationCode(6);
         var token = Token.builder()
                 .token(generatedToken)
-                .createdDate(LocalDateTime.now())
-                .expiredDate(LocalDateTime.now().plusMinutes(15))
+                .createdAt(LocalDateTime.now())
+                .expiredAt(LocalDateTime.now().plusMinutes(15))
                 .user(user)
                 .build();
         tokenRepository.save(token);
@@ -122,7 +121,7 @@ public class AuthenticationService {
         Token savedToken = tokenRepository.findByToken(token)
                 .orElseThrow(() -> new RuntimeException("Token Not Found"));
 
-        if(LocalDateTime.now().isAfter(savedToken.getExpiredDate())) {
+        if(LocalDateTime.now().isAfter(savedToken.getExpiredAt())) {
             sendValidationEmail(savedToken.getUser());
             throw new RuntimeException("Activated token has been expired, a new activate code ahs been sent to your email. Please, check it for your new code!");
         }

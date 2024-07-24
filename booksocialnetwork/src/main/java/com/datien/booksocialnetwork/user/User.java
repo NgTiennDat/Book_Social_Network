@@ -1,5 +1,6 @@
 package com.datien.booksocialnetwork.user;
 
+import com.datien.booksocialnetwork.book.Book;
 import com.datien.booksocialnetwork.role.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -50,6 +51,11 @@ public class User implements UserDetails, Principal {
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
+
+    @OneToMany(
+            mappedBy = "owner"
+    )
+    private List<Book> books;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

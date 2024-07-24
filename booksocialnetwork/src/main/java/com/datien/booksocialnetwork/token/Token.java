@@ -1,5 +1,6 @@
-package com.datien.booksocialnetwork.user;
+package com.datien.booksocialnetwork.token;
 
+import com.datien.booksocialnetwork.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,8 +22,8 @@ public class Token {
     @Column(unique = true)
     private String token;
 
-    private LocalDateTime createdDate;
-    private LocalDateTime expiredDate;
+    private LocalDateTime createdAt;
+    private LocalDateTime expiredAt;
     private LocalDateTime validatedAt;
 
     @ManyToOne
