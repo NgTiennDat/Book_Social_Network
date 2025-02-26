@@ -8,6 +8,9 @@ import com.datien.booknetwork.file.FileUtils;
 import com.datien.booknetwork.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @Service
 public class BookMapper {
 
@@ -20,6 +23,8 @@ public class BookMapper {
                 .synopsis(request.synopsis())
                 .archived(false)
                 .shareable(request.shareable())
+                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdBy(1)
                 .build();
     }
 

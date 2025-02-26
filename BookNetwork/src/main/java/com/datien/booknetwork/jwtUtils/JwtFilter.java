@@ -1,5 +1,6 @@
 package com.datien.booknetwork.jwtUtils;
 
+import com.datien.booknetwork.token.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+    private final TokenRepository tokenRepository;
 
     @Override
     protected void doFilterInternal(
@@ -48,6 +50,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+//            var isValidToken = tokenRepository.findByToken(jwt)
+//                    .map(token -> !token.isExpired() && !token.isRevoked())
+//                    .orElse(false);
 
             if(jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

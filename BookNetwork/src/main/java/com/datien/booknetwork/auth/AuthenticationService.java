@@ -9,6 +9,7 @@ import com.datien.booknetwork.role.RoleRepository;
 import com.datien.booknetwork.jwtUtils.JwtService;
 import com.datien.booknetwork.token.Token;
 import com.datien.booknetwork.token.TokenRepository;
+//import com.datien.booknetwork.token.TokenType;
 import com.datien.booknetwork.user.User;
 import com.datien.booknetwork.user.UserRepository;
 import jakarta.mail.MessagingException;
@@ -50,13 +51,13 @@ public class AuthenticationService {
                 .lastname(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .accountLocked(false)
-                .enabled(false)
+                .accountLocked(true)
+                .enabled(true)
                 .roles(List.of(userRole))
                 .build();
 
         userRepository.save(user);
-        sendValidationEmail(user);
+//        sendValidationEmail(user);
     }
 
     private void sendValidationEmail(User user) throws MessagingException {
@@ -78,6 +79,8 @@ public class AuthenticationService {
 
         var token = Token.builder()
                 .token(generatedToken)
+//                .expired(false)
+//                .revoked(false)
                 .expiresAt(LocalDateTime.now())
                 .expiresAt(LocalDateTime.now().plusMinutes(15))
                 .user(user)
@@ -115,6 +118,8 @@ public class AuthenticationService {
         claims.put("fullName", user.fullname());
 
         var jwtToken = jwtService.generateToken(claims, (User) auth.getPrincipal());
+//        revokeAllUserTokens(user);
+//        savedUserToken(user, jwtToken);
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
@@ -139,4 +144,33 @@ public class AuthenticationService {
         savedToken.setValidatedAt(LocalDateTime.now());
         tokenRepository.save(savedToken);
     }
+//
+//    private void savedUserToken(User user, String jwtToken) {
+//        var token = Token.builder()
+//                .user(user)
+//                .token(jwtToken)
+//                .tokenType(TokenType.BEARER)
+//                .expired(false)
+//                .revoked(false)
+//                .createdAt(LocalDateTime.now())
+//                .expiresAt(LocalDateTime.now().plusMinutes(15))
+//                .build();
+//        tokenRepository.save(token);
+//    }
+
+//    private void revokeAllUserTokens(User user) {
+//        var validUserToken = tokenRepository.findAllValidTokenByUser(user.getId());
+//
+//        if(validUserToken.isEmpty()) {
+//            throw new RuntimeException("Token not found");
+//        }
+//
+//        validUserToken.forEach(token -> {
+//            token.setExpired(true);
+//            token.setRevoked(true);
+//            token.setExpiresAt(LocalDateTime.now());
+//        });
+//
+//        tokenRepository.saveAll(validUserToken);
+//    }
 }

@@ -20,6 +20,12 @@ public class Token {
     @GeneratedValue
     private Integer id;
     private String token;
+//    private boolean expired;
+//    private boolean revoked;
+
+//    @Enumerated(EnumType.STRING)
+//    private TokenType tokenType = TokenType.BEARER;
+
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
     private LocalDateTime validatedAt;

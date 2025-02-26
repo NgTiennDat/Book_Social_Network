@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,17 +24,15 @@ public class BaseEntity {
     @GeneratedValue
     private Integer id;
 
-    @CreatedDate
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdDate;
-    @LastModifiedDate
-    @Column(insertable = false)
-    private LocalDateTime lastModifiedDate;
+    private Timestamp createdDate;
 
-    @CreatedDate
+    @Column(insertable = false)
+    private Timestamp lastModifiedDate;
+
     @Column(nullable = false, updatable = false)
     private Integer createdBy;
-    @LastModifiedDate
+
     @Column(insertable = false)
     private Integer lastModifiedBy;
 
